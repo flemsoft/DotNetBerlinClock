@@ -3,3 +3,7 @@
 ################################################################################
 
 /bin/Debug
+/packages
+/obj/Debug
+/BerlinClock.v12.suo
+/.vs/BerlinClock/v16
