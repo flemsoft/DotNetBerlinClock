@@ -49,3 +49,14 @@ RRRR
 OOOOOOOOOOO
 OOOO
 """
+
+Scenario: Leap second 23:59:60
+When the time is "23:59:60"
+Then the clock should look like
+"""
+Y
+OOOO
+OOOO
+OOOOOOOOOOO
+OOOO
+"""

@@ -60,5 +60,12 @@ namespace BerlinClock.Tests
         {
             berlinClock.convertTime("00:18:-3");
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ThrowArgument_IfFakeLeapSecond()
+        {
+            berlinClock.convertTime("22:59:60");
+        }
     }
 }

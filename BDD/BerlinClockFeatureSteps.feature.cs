@@ -136,6 +136,23 @@ testRunner.Then("the clock should look like", "Y\r\nRRRR\r\nRRRR\r\nOOOOOOOOOOO\
 #line hidden
             this.ScenarioCleanup();
         }
+
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Leap second 23:59:60")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "The Berlin Clock")]
+        public virtual void LeapSecond235960()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Leap second 23:59:60", ((string[])(null)));
+#line 53
+this.ScenarioSetup(scenarioInfo);
+#line 54
+testRunner.When("the time is \"23:59:60\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 55
+testRunner.Then("the clock should look like", "Y\r\nOOOO\r\nOOOO\r\nOOOOOOOOOOO\r\nOOOO", ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

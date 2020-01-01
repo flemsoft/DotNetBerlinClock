@@ -9,12 +9,12 @@ namespace BerlinClock
     public class TimeConverter : ITimeConverter
     {
         const int MaxHourValue = 24;
-        const int MinutesInOneHour = 60;
-        const int SecondsInOneMinute = 60;
+        const int MaxMinuteValue = 59;
+        const int MaxSecondValue = 60;  // 60 - because of Leap second support 
 
         const int ClockStep = 5;
 
-        const int TotalLampsInMinutesRow = MinutesInOneHour / ClockStep;
+        const int TotalLampsInMinutesRow = (MaxMinuteValue + 1) / ClockStep;
 
         public string convertTime(string aTime)
         {
@@ -30,12 +30,23 @@ namespace BerlinClock
             int minutes;
             int seconds;
             if (!ParseTimePart(timeParts[0], MaxHourValue, out hours) ||
-                !ParseTimePart(timeParts[1], MinutesInOneHour - 1, out minutes) ||
-                !ParseTimePart(timeParts[2], SecondsInOneMinute - 1, out seconds))
+                !ParseTimePart(timeParts[1], MaxMinuteValue, out minutes) ||
+                !ParseTimePart(timeParts[2], MaxSecondValue, out seconds))
                 throw new ArgumentException(Properties.Resources.InvalidTimeFormatMessage);
 
             if (hours == MaxHourValue && (minutes > 0 || seconds > 0))
                 throw new ArgumentException(Properties.Resources.InvalidTimeFormatMessage);
+
+            // Adjusting time for Leap second
+            if (seconds == MaxSecondValue)
+            {
+                if (hours != (MaxHourValue - 1) || minutes != MaxMinuteValue)
+                    throw new ArgumentException(Properties.Resources.InvalidTimeFormatMessage);
+
+                hours = 0;
+                minutes = 0;
+                seconds = 0;
+            }
 
             var result = new StringBuilder();
 
